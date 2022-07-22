@@ -13,6 +13,8 @@ const home = require("./src/routes/home");
 // 앱 세팅 
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
+// 미들웨어 등록 
+app.use(express.static(`${__dirname}/src/public`));  // static을 통해 정적 경로 설정 
 
 // index.js와 연결하기 
 app.use("/", home); // use -> 미들웨어를 등록해주는 매서드 
