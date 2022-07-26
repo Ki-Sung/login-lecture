@@ -8,10 +8,13 @@ const router = express.Router();
 const ctrl = require("./home.ctrl")
 
 // 서버 루트 경로 만들기 
-router.get("/", ctrl.home);
+router.get("/", ctrl.output.home);
 
 // 로그인 경로 만들기 
-router.get("/login", ctrl.login);
+router.get("/login", ctrl.output.login);
+
+// 로그인을 post로 동작할 수 있게 설정
+router.post("/login", ctrl.process.login);
 
 // 해당파일을 외부에 사용할 수 있도록 하기 
 module.exports = router;
