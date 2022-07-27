@@ -39,7 +39,7 @@ const process = {
         // 실패 했다면 실패로 나타내주기 
         return res.json({
             success: false,
-            msg: "로그인에 실패하셨습니다."
+            msg: "아이디 또는 비밀번호를 잘못 입력했습니다. 다시 확인해주세요."
         });
     },
 };
