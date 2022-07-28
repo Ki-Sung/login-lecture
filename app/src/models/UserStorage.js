@@ -21,7 +21,6 @@ class UserStorage {
         }, {});
         return newUsers;
     }
-
 }
 
 module.exports = UserStorage;
