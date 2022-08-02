@@ -5,7 +5,7 @@
 
 const id = document.querySelector("#id"),
 password = document.querySelector("#password"),
-loginBtn = document.querySelector("button");
+loginBtn = document.querySelector("#button");
 
 // 클릭이라는 이벤트를 발생시키면 로그인하기 
 loginBtn.addEventListener("click", login);
