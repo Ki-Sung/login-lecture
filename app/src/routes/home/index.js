@@ -13,6 +13,9 @@ router.get("/", ctrl.output.home);
 // 로그인 경로 만들기 
 router.get("/login", ctrl.output.login);
 
+// 회원가입 경로 만들기 
+router.get("/register", ctrl.output.register);
+
 // 로그인을 post로 동작할 수 있게 설정
 router.post("/login", ctrl.process.login);
 

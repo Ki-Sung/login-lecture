@@ -14,6 +14,11 @@ const output = {
     login: (req, res) => {
     res.render("home/login");
     },
+
+    // 회원가입 컨트롤러
+    register: (req, res) => {
+    res.render("home/register");
+    }
 };
 
 const process = {
