@@ -1,6 +1,7 @@
 // 자바스크립트 파일 생성 시 맨 상단에 이크마스크립트를 준수하겠다는 내용을 기재한다. 꼭!
 "user strict";
 
+const { response } = require("express");
 // UserStorage로 접근하여 데이터 가져오기
 const UserStorage = require("./UserStorage");
 
@@ -26,6 +27,7 @@ class User{
     register() {
         const client = this.body;
         UserStorage.save(client);
+        return response;
     };
 };
 
