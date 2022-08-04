@@ -14,11 +14,13 @@ registerBtn.addEventListener("click", register);
 
 // 위 두 번쨰 파라미터 register 함수 설정 
 function register() {
+    if (!id.value) return alert("아이디를 입력해주세요!");
+    if (password.value !== confirmPassword.value) return alert("입력한 비밀번호와 일치하지 않습니다.");
+    
     const req = {
         id: id.value,
         name: name.value,
         password: password.value,
-        confirmPassword: confirmPassword.value,
     };
 
     fetch("/register", {

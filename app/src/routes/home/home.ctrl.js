@@ -25,9 +25,13 @@ const process = {
     login: (req, res) => {
         const user = new User(req.body);
         const response = user.login();
-        console.log(response);
         return res.json(response);
     },
+    register: (req, res) => {
+        const user = new User(req.body);
+        const response = user.register();
+        return res.json(response);
+    }
 };
 
 // index.js에서 사용할 수 있게 모듈을 바깥으로 뺴주기 
