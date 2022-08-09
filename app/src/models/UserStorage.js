@@ -8,6 +8,17 @@ const fs = require("fs").promises;
 
 // 클래스를 만들 떄 파일이름과 동일하게 하면 좋다. 
 class UserStorage {
+    static #getUserInfo(data, id) {
+        const users = JSON.parse(data);
+        const idx = users.id.indexOf(id);
+        const usersKeys = Object.keys(users); // [id, password, name]
+        const userInfo = usersKeys.reduce((newUser, info) => {
+            newUser[info] = users[info][idx];
+            return newUser;
+        }, {});
+        
+        return userInfo;
+    };
     // 외부에서 로그인 기능을 위한 로그인 로직처리를 위한 메서드
     static getUsers(...fields) {
         // const users = this.#users;
@@ -24,18 +35,11 @@ class UserStorage {
     static getUserInfo(id) {
         return fs.readFile("./src/database/users.json")
         .then((data) => {
-            const users = JSON.parse(data);
-            const idx = users.id.indexOf(id);
-            const usersKeys = Object.keys(users); // [id, password, name]
-            const userInfo = usersKeys.reduce((newUser, info) => {
-                newUser[info] = users[info][idx];
-                return newUser;
-            }, {});
-            console.log(userInfo);
-            return userInfo;
+            return this.#getUserInfo(data, id);
         })
         .catch(console.error);
     };
+
     static save(userInfo) {
         // const users = this.#users;
         users.id.push(userInfo.id);
