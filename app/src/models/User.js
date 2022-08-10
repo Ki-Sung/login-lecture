@@ -24,10 +24,14 @@ class User{
         return { success: false, msg: "회원정보를 입력하지 않았거나 존재하지 않는 아이디입니다. 다시 입력해주세요." }; // 둘다 없는 경우 false
     };
 
-    register() {
+    async register() {
         const client = this.body;
-        UserStorage.save(client);
+        try {
+        const response = await UserStorage.save(client);
         return response;
+        } catch (err) {
+        return { success: false, msg:err }; 
+        }
     };
 };
 
