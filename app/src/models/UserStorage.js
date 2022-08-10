@@ -19,9 +19,9 @@ class UserStorage {
         
         return userInfo;
     };
-    // 외부에서 로그인 기능을 위한 로그인 로직처리를 위한 메서드
-    static getUsers(...fields) {
-        // const users = this.#users;
+
+    static #getUsers(data, fields) {
+        const users = JSON.parse(data);
         const newUsers = fields.reduce((newUsers, field) => {
             if (users.hasOwnProperty(field)) {
                 newUsers[field] = users[field];
@@ -31,9 +31,20 @@ class UserStorage {
         return newUsers;
     };
 
+    // 외부에서 로그인 기능을 위한 로그인 로직처리를 위한 메서드
+    static getUsers(...fields) {
+        return fs
+        .readFile("./src/database/users.json")
+        .then((data) => {
+            return this.#getUsers(data, fields);
+        })
+        .catch(console.error);
+    };
+
     // User 모델과 연결
     static getUserInfo(id) {
-        return fs.readFile("./src/database/users.json")
+        return fs
+        .readFile("./src/database/users.json")
         .then((data) => {
             return this.#getUserInfo(data, id);
         })
@@ -41,11 +52,10 @@ class UserStorage {
     };
 
     static save(userInfo) {
-        // const users = this.#users;
-        users.id.push(userInfo.id);
-        users.name.push(userInfo.name);
-        users.password.push(userInfo.password);
-        return { success: true };
+        const users = this.getUsers("id", "password", "id");
+        console.log(users);
+        // 데이터 추가
+        fs.writeFile("./src/database/users.json", users);
     };
 
 };
