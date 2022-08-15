@@ -4,9 +4,12 @@
 // 모듈 
 // 1. express라는 모듈 다운 받기 
 const express = require("express");
-// 3. bdoy-parser 라는 모듈 받기 
+// 2. bdoy-parser 라는 모듈 받기 
 const bodyParser = require("body-parser");
-// 2. express를 실행시켜 app의 변수에 넣게 함
+// 3. 환경변수 설정 
+const dotenv = require("dotenv");
+dotenv.config();
+// 4. express를 실행시켜 app의 변수에 넣게 함
 const app = express();
 
 // 라우팅

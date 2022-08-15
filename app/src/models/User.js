@@ -13,15 +13,19 @@ class User{
 
     async login() {
         const client = this.body;
-        const { id, password } = await UserStorage.getUserInfo(client.id);
+        try {
+            const { id, password } = await UserStorage.getUserInfo(client.id);
         
-        if (id) {
-            if (id === client.id && password === client.password) {
-                return { success: true }; // 위 조건이 성립되면 true
+            if (id) {
+                if (id === client.id && password === client.password) {
+                    return { success: true }; // 위 조건이 성립되면 true
+                };
+                return { success: false, msg: "아이디 혹은 비밀번호가 틀렸습니다." }; // id와 password가 다르면 false
             };
-            return { success: false, msg: "아이디 혹은 비밀번호가 틀렸습니다." }; // id와 password가 다르면 false
-        };
-        return { success: false, msg: "회원정보를 입력하지 않았거나 존재하지 않는 아이디입니다. 다시 입력해주세요." }; // 둘다 없는 경우 false
+            return { success: false, msg: "회원정보를 입력하지 않았거나 존재하지 않는 아이디입니다. 다시 입력해주세요." }; // 둘다 없는 경우 false
+        } catch (err) {
+            return { success: false, msg: err };
+        }
     };
 
     async register() {
